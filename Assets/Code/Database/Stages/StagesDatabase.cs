@@ -22,7 +22,18 @@ namespace Database.Stages
 
         #region METHODS
 
+        public bool ContainStageId(int stageId)
+        {
+            return Stages.Length - 1 >= stageId;
+        }
 
+        public StageData TryGetNextStage(int stageId)
+        {
+            if (ContainStageId(stageId) == false)
+                return null;
+
+            return Stages[stageId];
+        }
 
         #endregion
     }

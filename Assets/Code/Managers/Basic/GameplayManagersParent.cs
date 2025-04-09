@@ -1,6 +1,10 @@
 
 using Gameplay.Inputs;
+using Gameplay.PureGameplay;
+using Gameplay.Score;
 using Gameplay.Selection;
+using Gameplay.Spawning;
+using Gameplay.Stages;
 using Gameplay.Timing;
 
 public class GameplayManagersParent : ManagersParent
@@ -20,6 +24,10 @@ public class GameplayManagersParent : ManagersParent
         managers.Add(TimeManager.Instance);
         managers.Add(InputManager.Instance);
         managers.Add(SelectionManager.Instance);
+        managers.Add(GameManager.Instance);
+        managers.Add(SpawnManager.Instance);
+        managers.Add(ScoreManager.Instance);
+        managers.Add(StageManager.Instance);
     }
 
     #endregion

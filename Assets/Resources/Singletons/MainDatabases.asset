@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1848a0eee81b5544d9a0b01f129e35ec, type: 3}
   m_Name: MainDatabases
   m_EditorClassIdentifier: 
+  stagesDatabase: {fileID: 11400000, guid: c3c2c4efa2b748a41855c67768e3f1ef, type: 2}

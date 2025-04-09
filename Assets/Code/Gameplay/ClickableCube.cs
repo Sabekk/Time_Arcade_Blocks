@@ -29,6 +29,12 @@ namespace Gameplay.Props
 
         #region METHODS
 
+        public void Initialize(Color color, float scale)
+        {
+            renderer.material.color = color;
+            transform.localScale = Vector3.one * scale;
+        }
+
         public void OnClick()
         {
             //Tmp
