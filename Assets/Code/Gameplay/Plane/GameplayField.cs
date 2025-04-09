@@ -26,7 +26,6 @@ namespace Gameplay.Field
             {
                 if (!slots[i].IsReserved)
                     slotsTmp.Add(slots[i]);
-
             }
 
             if (slotsTmp.Count <= 0)

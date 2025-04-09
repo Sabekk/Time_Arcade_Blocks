@@ -26,6 +26,15 @@ namespace Database.Stages
 
         #region METHODS
 
+        public StageElementData GetRandomElement()
+        {
+            if (StageElements == null || StageElements.Length == 0)
+                return null;
+
+            int randomIndex = UnityEngine.Random.Range(0, StageElements.Length);
+            return StageElements[randomIndex];
+        }
+
         #endregion
     }
 }

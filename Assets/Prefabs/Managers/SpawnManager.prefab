@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayFieldPrefab: {fileID: 0}
-  cubePrefab: {fileID: 0}
+  cubePrefab: {fileID: 2458330126606340977, guid: a31043f87b5da624d9bd079c7ae13b53, type: 3}

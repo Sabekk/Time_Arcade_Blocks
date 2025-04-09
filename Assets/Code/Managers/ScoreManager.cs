@@ -1,3 +1,4 @@
+using Gameplay.Props;
 using Gameplay.Stages;
 using System;
 using System.Collections;
@@ -43,6 +44,8 @@ namespace Gameplay.Score
             base.AttachEvents();
             if (StageManager.Instance)
                 StageManager.Instance.OnStageChanged += HandleStageChanged;
+
+            ClickableCube.OnClicked += HandleCubeClicked;
         }
 
         protected override void DetachEvents()
@@ -50,9 +53,11 @@ namespace Gameplay.Score
             base.DetachEvents();
             if (StageManager.Instance)
                 StageManager.Instance.OnStageChanged -= HandleStageChanged;
+
+            ClickableCube.OnClicked -= HandleCubeClicked;
         }
 
-        public void AddToScore(int delta)
+        public void AddToScore(float delta)
         {
             float lastScore = currentScore;
             currentScore += delta;
@@ -88,6 +93,11 @@ namespace Gameplay.Score
         }
 
         #region HANDLERS
+
+        private void HandleCubeClicked(float reward)
+        {
+            AddToScore(reward);
+        }
 
         private void HandleStageChanged()
         {

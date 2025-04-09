@@ -1,6 +1,9 @@
 using Database;
 using Database.Stages;
 using Gameplay.Field;
+using Gameplay.Props;
+using Gameplay.Spawning;
+using Gameplay.Stages;
 using Gameplay.Timing;
 using System;
 using System.Collections;
@@ -58,11 +61,31 @@ namespace Gameplay.PureGameplay
                 TimeManager.Instance.OnTimeTicked -= HandleTimeTicked;
         }
 
+        private void TryAddCube()
+        {
+            if (SpawnManager.Instance == null)
+                return;
+
+            ClickableCube cube = SpawnManager.Instance.TrySpawnNewCube();
+
+            if (cube == null)
+            {
+                OnGameOver?.Invoke();
+                //TODO show gameover window
+            }
+        }
+
         #region HANDLERS
 
         private void HandleTimeTicked()
         {
             CurrentTime += Time.deltaTime;
+
+            if (CurrentTime >= StageManager.Instance.CurrentStageData.SpawningSpeed)
+            {
+                TryAddCube();
+                CurrentTime = 0;
+            }
         }
 
         #endregion
