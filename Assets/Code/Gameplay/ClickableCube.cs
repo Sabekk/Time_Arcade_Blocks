@@ -16,7 +16,7 @@ namespace Gameplay.Props
 
         #region VARIABLES
 
-        [SerializeField] private Renderer renderer;
+        [SerializeField] private Renderer rend;
         [SerializeField] private DeathParticleVisualization particleOnDeath;
 
         private float reward;
@@ -31,8 +31,8 @@ namespace Gameplay.Props
 
         private void Awake()
         {
-            if (renderer == null)
-                renderer = GetComponent<Renderer>();
+            if (rend == null)
+                rend = GetComponent<Renderer>();
         }
 
         private void OnDestroy()
@@ -46,7 +46,7 @@ namespace Gameplay.Props
 
         public void Initialize(Color color, float scale, float reward)
         {
-            renderer.material.color = color;
+            rend.material.color = color;
             transform.localScale = Vector3.one * scale;
             this.reward = reward;
             AttachEvents();
@@ -63,7 +63,7 @@ namespace Gameplay.Props
             {
                 DeathParticleVisualization particle = Instantiate(particleOnDeath, transform);
                 particle.transform.SetParent(null);
-                particle.PlayDeath(renderer.material.color);
+                particle.PlayDeath(rend.material.color);
             }
             if (publishReward)
                 OnClicked?.Invoke(reward);
@@ -73,20 +73,30 @@ namespace Gameplay.Props
 
         private void AttachEvents()
         {
-            if (GameManager.Instance)
-                GameManager.Instance.OnGameOver += HandleGameOver;
+            if (CurrentGameManager.Instance)
+            {
+                CurrentGameManager.Instance.OnPublishGameOver += HandleGameOver;
+                CurrentGameManager.Instance.OnPublicGameRestart += HandleGameRestart;
+            }
         }
 
         private void DetachEvents()
         {
-            if (GameManager.Instance)
-                GameManager.Instance.OnGameOver -= HandleGameOver;
-
+            if (CurrentGameManager.Instance)
+            {
+                CurrentGameManager.Instance.OnPublishGameOver -= HandleGameOver;
+                CurrentGameManager.Instance.OnPublicGameRestart -= HandleGameRestart;
+            }
         }
 
         #region HANDLERS
 
         private void HandleGameOver()
+        {
+            DestroyObject(false);
+        }
+
+        private void HandleGameRestart()
         {
             DestroyObject(false);
         }

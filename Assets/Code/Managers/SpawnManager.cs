@@ -20,7 +20,7 @@ namespace Gameplay.Spawning
 
         #region PROPERTIES
 
-        private GameManager GameManager => GameManager.Instance;
+        private CurrentGameManager GameManager => CurrentGameManager.Instance;
         private StageManager StageManager => StageManager.Instance;
         private GameplayField GameplayField => GameManager.GameplayField;
         private StageData CurrentStage => StageManager.CurrentStageData;

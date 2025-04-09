@@ -21,5 +21,6 @@ namespace Gameplay.Timing
         }
 
         #endregion
+
     }
 }

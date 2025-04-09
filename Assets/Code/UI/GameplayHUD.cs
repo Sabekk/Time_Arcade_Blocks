@@ -80,7 +80,7 @@ namespace Gameplay.HUD
 
         public void Restart()
         {
-            GameManager.Instance.ForceRestart();
+            CurrentGameManager.Instance.ForceRestart();
         }
 
         public void Exit()

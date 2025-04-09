@@ -1,22 +1,19 @@
-using Database;
-using Database.Stages;
 using Gameplay.Field;
 using Gameplay.Props;
 using Gameplay.Spawning;
 using Gameplay.Stages;
 using Gameplay.Timing;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.PureGameplay
 {
-    public class GameManager : GameplayManager<GameManager>
+    public class CurrentGameManager : GameplayManager<CurrentGameManager>, IGameOverListener, IResetListener
     {
         #region ACTIONS
 
-        public event Action OnGameOver;
+        public event Action OnPublishGameOver;
+        public event Action OnPublicGameRestart;
 
         #endregion
 
@@ -45,7 +42,20 @@ namespace Gameplay.PureGameplay
 
         public void ForceRestart()
         {
+            ((GameplayManagersParent)ManagersParent.Instance).ResetGame();
+        }
 
+        public void OnGameOver()
+        {
+            OnPublishGameOver?.Invoke();
+            DetachEvents();
+        }
+
+        public void OnGameReset()
+        {
+            CurrentTime = 0;
+            AttachEvents();
+            OnPublicGameRestart?.Invoke();
         }
 
         protected override void AttachEvents()
@@ -71,8 +81,7 @@ namespace Gameplay.PureGameplay
 
             if (cube == null)
             {
-                OnGameOver?.Invoke();
-                //TODO show gameover window
+                ((GameplayManagersParent)ManagersParent.Instance).GameOver();
             }
         }
 

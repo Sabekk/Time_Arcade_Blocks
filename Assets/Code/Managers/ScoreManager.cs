@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Gameplay.Score
 {
-    public class ScoreManager : GameplayManager<ScoreManager>
+    public class ScoreManager : GameplayManager<ScoreManager>, IGameOverListener, IResetListener
     {
         #region ACTION
 
@@ -39,6 +39,18 @@ namespace Gameplay.Score
             ResetThresholdToCurrentState();
         }
 
+        public void OnGameOver()
+        {
+            DetachEvents();
+        }
+
+        public void OnGameReset()
+        {
+            AttachEvents();
+            ResetScore();
+            ResetThresholdToCurrentState();
+        }
+
         protected override void AttachEvents()
         {
             base.AttachEvents();
@@ -57,7 +69,7 @@ namespace Gameplay.Score
             ClickableCube.OnClicked -= HandleCubeClicked;
         }
 
-        public void AddToScore(float delta)
+        private void AddToScore(float delta)
         {
             float lastScore = currentScore;
             currentScore += delta;
@@ -66,7 +78,7 @@ namespace Gameplay.Score
                 OnScoreChanged?.Invoke();
         }
 
-        public void ResetScore()
+        private void ResetScore()
         {
             currentScore = 0;
             OnScoreChanged?.Invoke();

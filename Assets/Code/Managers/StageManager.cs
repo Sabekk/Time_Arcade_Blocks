@@ -5,7 +5,7 @@ using System;
 
 namespace Gameplay.Stages
 {
-    public class StageManager : GameplayManager<StageManager>
+    public class StageManager : GameplayManager<StageManager>, IGameOverListener, IResetListener
     {
         #region ACTIONS
 
@@ -31,9 +31,18 @@ namespace Gameplay.Stages
         public override void Initialzie()
         {
             base.Initialzie();
-            currentStageId = 0;
-            CurrentStageData = StagesDatabase.TryGetNextStage(currentStageId);
-            OnStageChanged?.Invoke();
+            ResetState();
+        }
+
+        public void OnGameOver()
+        {
+            DetachEvents();
+        }
+
+        public void OnGameReset()
+        {
+            AttachEvents();
+            ResetState();
         }
 
         protected override void AttachEvents()
@@ -61,6 +70,13 @@ namespace Gameplay.Stages
             }
             else
                 DetachEvents();
+        }
+
+        private void ResetState()
+        {
+            currentStageId = 0;
+            CurrentStageData = StagesDatabase.TryGetNextStage(currentStageId);
+            OnStageChanged?.Invoke();
         }
 
         #region HANDLERS
