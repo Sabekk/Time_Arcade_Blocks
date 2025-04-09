@@ -1,3 +1,4 @@
+using Gameplay.PureGameplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace Gameplay.Props
                 renderer = GetComponent<Renderer>();
         }
 
+        private void OnDestroy()
+        {
+            DetachEvents();
+        }
+
         #endregion
 
         #region METHODS
@@ -43,23 +49,49 @@ namespace Gameplay.Props
             renderer.material.color = color;
             transform.localScale = Vector3.one * scale;
             this.reward = reward;
+            AttachEvents();
         }
 
         public void OnClick()
         {
-            //Tmp
+            DestroyObject(true);
+        }
 
+        private void DestroyObject(bool publishReward)
+        {
             if (particleOnDeath != null)
             {
                 DeathParticleVisualization particle = Instantiate(particleOnDeath, transform);
                 particle.transform.SetParent(null);
                 particle.PlayDeath(renderer.material.color);
             }
-
-            OnClicked?.Invoke(reward);
+            if (publishReward)
+                OnClicked?.Invoke(reward);
 
             Destroy(gameObject);
         }
+
+        private void AttachEvents()
+        {
+            if (GameManager.Instance)
+                GameManager.Instance.OnGameOver += HandleGameOver;
+        }
+
+        private void DetachEvents()
+        {
+            if (GameManager.Instance)
+                GameManager.Instance.OnGameOver -= HandleGameOver;
+
+        }
+
+        #region HANDLERS
+
+        private void HandleGameOver()
+        {
+            DestroyObject(false);
+        }
+
+        #endregion
 
         #endregion
     }
