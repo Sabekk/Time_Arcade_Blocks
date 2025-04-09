@@ -26,7 +26,7 @@ namespace Gameplay.Score
         #region PROPERTIES
 
         public float CurrentScore => currentScore;
-        private float ThresholdScore => thresholdScore;
+        public float ThresholdScore => thresholdScore;
 
         #endregion
 

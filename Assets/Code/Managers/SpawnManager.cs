@@ -14,7 +14,6 @@ namespace Gameplay.Spawning
         #region VARIABLES
 
         [Header("Prefabs")]
-        [SerializeField] private GameplayField gameplayFieldPrefab;
         [SerializeField] private ClickableCube cubePrefab;
 
         #endregion

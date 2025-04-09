@@ -25,15 +25,11 @@ namespace Gameplay.PureGameplay
         [SerializeField] private GameplayField gameplayFieldPrefab;
         [SerializeField] private GameplayField gameplayField;
 
-        private int currentStage = 0;
-
         #endregion
 
         #region PROPERTIES
 
         public GameplayField GameplayField => gameplayField;
-        public StagesDatabase StagesDatabase => MainDatabases.Instance.StagesDatabase;
-        private StageData CurrentStage { get; set; }
         private float CurrentTime { get; set; }
 
         #endregion
@@ -45,6 +41,11 @@ namespace Gameplay.PureGameplay
             base.Initialzie();
             if (gameplayField == null)
                 gameplayField = Instantiate(gameplayFieldPrefab);
+        }
+
+        public void ForceRestart()
+        {
+
         }
 
         protected override void AttachEvents()
