@@ -1,4 +1,5 @@
 using Gameplay.Props;
+using Gameplay.PureGameplay;
 using Gameplay.Stages;
 using System;
 using System.Collections;
@@ -46,6 +47,9 @@ namespace Gameplay.Score
 
         public void OnGameReset()
         {
+            //Refresh events
+            DetachEvents();
+
             AttachEvents();
             ResetScore();
             ResetThresholdToCurrentState();

@@ -41,6 +41,9 @@ namespace Gameplay.Stages
 
         public void OnGameReset()
         {
+            //Refresh events
+            DetachEvents();
+
             AttachEvents();
             ResetState();
         }

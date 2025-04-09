@@ -27,6 +27,7 @@ namespace Gameplay.PureGameplay
         #region PROPERTIES
 
         public GameplayField GameplayField => gameplayField;
+        public bool IsGameOver { get; set; }
         private float CurrentTime { get; set; }
 
         #endregion
@@ -38,6 +39,7 @@ namespace Gameplay.PureGameplay
             base.Initialzie();
             if (gameplayField == null)
                 gameplayField = Instantiate(gameplayFieldPrefab);
+            IsGameOver = false;
         }
 
         public void ForceRestart()
@@ -47,12 +49,17 @@ namespace Gameplay.PureGameplay
 
         public void OnGameOver()
         {
+            IsGameOver = true;
             OnPublishGameOver?.Invoke();
             DetachEvents();
         }
 
         public void OnGameReset()
         {
+            //Refresh events
+            DetachEvents();
+
+            IsGameOver = false;
             CurrentTime = 0;
             AttachEvents();
             OnPublicGameRestart?.Invoke();
@@ -72,6 +79,7 @@ namespace Gameplay.PureGameplay
                 TimeManager.Instance.OnTimeTicked -= HandleTimeTicked;
         }
 
+        //TODO Make gamestates
         private void TryAddCube()
         {
             if (SpawnManager.Instance == null)
@@ -80,9 +88,7 @@ namespace Gameplay.PureGameplay
             ClickableCube cube = SpawnManager.Instance.TrySpawnNewCube();
 
             if (cube == null)
-            {
                 ((GameplayManagersParent)ManagersParent.Instance).GameOver();
-            }
         }
 
         #region HANDLERS
