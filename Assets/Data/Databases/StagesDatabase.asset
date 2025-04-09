@@ -12,3 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6922f4b32fbc8c47bc502a84d179259, type: 3}
   m_Name: StagesDatabase
   m_EditorClassIdentifier: 
+  stages:
+  - stageElements:
+    - scale: 1.5
+      pointReward: 1
+    pointThreshold: 10
+    spawningSpeed: 1
+  - stageElements:
+    - scale: 1.5
+      pointReward: 1
+    - scale: 1
+      pointReward: 2
+    pointThreshold: 25
+    spawningSpeed: 0.8
+  - stageElements:
+    - scale: 1.5
+      pointReward: 1
+    - scale: 1
+      pointReward: 2
+    pointThreshold: 50
+    spawningSpeed: 0.6
+  - stageElements:
+    - scale: 1.5
+      pointReward: 3
+    - scale: 1
+      pointReward: 2
+    - scale: 0.5
+      pointReward: 3
+    pointThreshold: 10
+    spawningSpeed: 0.4

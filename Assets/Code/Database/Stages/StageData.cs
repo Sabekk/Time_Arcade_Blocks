@@ -10,7 +10,7 @@ namespace Database.Stages
     {
         #region VARIABLES
 
-        [SerializeReference] private StageElementData[] stageElements;
+        [SerializeField] private StageElementData[] stageElements;
         [SerializeField] private float pointThreshold;
         [SerializeField] private float spawningSpeed;
 
