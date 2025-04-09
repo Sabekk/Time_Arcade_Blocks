@@ -54,6 +54,7 @@ namespace Gameplay.HUD
             scoreText.SetText("Score");
             slider.value = 0;
             slider.maxValue = 1;
+            RefreshView();
         }
 
         private void AttachEvents()
