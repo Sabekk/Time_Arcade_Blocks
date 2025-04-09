@@ -1,4 +1,6 @@
 
+using Gameplay.Timing;
+
 public class GameplayManagersParent : ManagersParent
 {
     #region VARIABLES
@@ -13,7 +15,7 @@ public class GameplayManagersParent : ManagersParent
 
     protected override void SetManagers()
     {
-
+        managers.Add(TimeManager.Instance);
     }
 
     #endregion

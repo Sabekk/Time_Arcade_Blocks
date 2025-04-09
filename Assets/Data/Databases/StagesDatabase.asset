@@ -28,16 +28,12 @@ MonoBehaviour:
   - stageElements:
     - scale: 1.5
       pointReward: 1
-    - scale: 1
-      pointReward: 2
+    - scale: 0.5
+      pointReward: 3
     pointThreshold: 50
     spawningSpeed: 0.6
   - stageElements:
-    - scale: 1.5
-      pointReward: 3
-    - scale: 1
-      pointReward: 2
     - scale: 0.5
       pointReward: 3
-    pointThreshold: 10
+    pointThreshold: 100
     spawningSpeed: 0.4
