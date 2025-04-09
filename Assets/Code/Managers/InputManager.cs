@@ -45,6 +45,19 @@ namespace Gameplay.Inputs
             SelectionInputs = new(Input);
         }
 
+        public override void LateInitialzie()
+        {
+            base.LateInitialzie();
+            RefreshInputs();
+        }
+
+
+        private void RefreshInputs()
+        {
+            //Add switch or sth else to change inputs;
+            SelectionInputs.Enable();
+        }
+
         #endregion
     }
 }

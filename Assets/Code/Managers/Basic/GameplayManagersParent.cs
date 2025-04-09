@@ -1,4 +1,6 @@
 
+using Gameplay.Inputs;
+using Gameplay.Selection;
 using Gameplay.Timing;
 
 public class GameplayManagersParent : ManagersParent
@@ -16,6 +18,8 @@ public class GameplayManagersParent : ManagersParent
     protected override void SetManagers()
     {
         managers.Add(TimeManager.Instance);
+        managers.Add(InputManager.Instance);
+        managers.Add(SelectionManager.Instance);
     }
 
     #endregion
